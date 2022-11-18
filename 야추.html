@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>야추</title>
+<style type="text/css">
+  #scoreBoard {
+	width : 834px;
+	height : 1194px;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	}
+  #scoreTable {
+	border : 1px solid #D9D9D9;
+	border-collapse: collapse;
+	width : 585px;
+	height : 959px;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+  #scoreTable th, tr {
+	border-bottom : 1px solid #D9D9D9;
+	padding : 0px;
+  }
+  #scoreTable label {
+	margin : 0px;
+  }
+  #scoreTable img {
+	width : 28px;
+	height : 28px;
+	margin-left : 16px;
+  }
+  .diceimg {
+	width : 68px;
+  }
+  .diceType {
+	width : 200px;
+    text-align : left;
+  }
+  .diceType label{
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 300;
+	font-size: 30px;
+	line-height: 36px;
+
+	text-transform: capitalize;
+	
+	padding-bottom: 7px;
+  }
+  .score, .subTotalScore, .bonusScore, .totalScore {
+	border-left : 1px solid #D9D9D9;
+    text-align: center;
+  }
+  .pname{
+	border: 1px solid #D9D9D9;
+	text-align: center;
+  }
+  .pname label {
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 800;
+	font-size: 40px;
+	line-height: 36px;
+	text-transform: uppercase;
+  }
+  #turn {
+	width : 270px
+  }
+  #turnTop {
+  	width : 268px;
+	height : 52px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 200;
+	font-size: 30px;
+	color: #939393;
+	line-height: 36px;
+	text-transform: uppercase;
+	text-align : center;
+	padding-top : 15px;
+
+  }
+  #turnBotton {
+	width : 268px;
+    height : 105px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 200;
+	font-size: 80px;
+	line-height: 95px;
+	letter-spacing: 0.075em;
+	text-transform: uppercase;
+	text-align : center;
+
+  }
+  #categorise{
+	height : 58px;
+	background-color : #403F41;
+	text-align: center;
+
+  }
+  #categorise label{
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 30px;
+	line-height: 36px;
+	text-transform: capitalize;
+	color: #ffffff;
+	padding-bottom: 5px;
+
+  }
+  .score{
+    height : 49px
+  }
+  #subTotal{
+	height : 38px;
+	background-color : #403F41;
+  }
+  #subTotal label{
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 21px;
+	text-transform: capitalize;
+	color: #ffffff;
+	padding-bottom: 5px;
+	padding-left: 20px;
+  }
+  .subTotalScore label{
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 300;
+	font-size: 22px;
+	line-height: 26px;
+	text-align: right;
+	text-transform: capitalize;
+	color: #A0A0A0;
+  }
+  #bonus {
+	height : 54px;
+	background-color : #403F41;
+  }
+  #bonus label {
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 30px;
+	line-height: 36px;
+	text-transform: capitalize;
+	color: #ffffff;
+	padding-bottom: 5px;
+	padding-left: 20px;
+  }
+  #total {
+	height : 62px;
+	background-color : #403F41;
+  }
+  #total label {
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 30px;
+	line-height: 36px;
+	text-transform: capitalize;
+	color: #ffffff;
+	padding-bottom: 5px;
+	padding-left: 20px;
+  }
+.modalFrontPart {
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	border: 2px solid black;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 0 0 0;
+	background:#eee;
+	z-index: 2;
+	display : none;
+	text-align: center;
+}
+.modalMiddlePart {
+	width: 415px;
+	height: 540px;
+	position: absolute;
+	border: 2px solid black;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 0 0 0;
+	background:#eee;
+	z-index: 2;
+	display : none;
+	text-align: center;
+	padding: auto;
+}
+.modalLastPart {
+	width: 470px;
+	height: 245px;
+	position: absolute;
+	border: 2px solid black;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 0 0 0;
+	background:#eee;
+	z-index: 2;
+	display : none;
+	text-align: center;
+	padding: auto;
+}
+.modalFrontPart.show-modal {
+
+	display: block;
+}
+.modalMiddlePart.show-modal {
+
+	display: block;
+}
+.modalLastPart.show-modal {
+
+	display: block;
+}
+.modalContainer.show-modal {
+
+	display: block;
+}
+.modalContainer {
+	position: absolute;
+	width: 100%;
+	height: 140%;
+	background-color:rgba(0, 0,0, 0.5);
+	top:0;
+	left: 0;
+	z-index: 1;
+	display : none;
+}
+.scoreFrontInput {
+	width: 170px;
+	height: 170px;
+	float: left;
+	position: relative;
+	top: 10px;
+	left: 10px;
+	margin: 10px 10px 10px 10px;
+	padding-bottom: 10px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 80px;
+	line-height: 36px;
+	text-transform: capitalize;
+}
+.scoreMiddleInput {
+	width: 110px;
+	height: 110px;
+	float: left;
+	position: relative;
+	top: -50px;
+	left: 10px;
+	margin: 10px 10px 10px 10px;
+	padding-bottom: 10px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 80px;
+	line-height: 36px;
+}
+.scoreLastInput {
+	width: 200px;
+	height: 200px;
+	float: left;
+	position: relative;
+	top: 10px;
+	left: 10px;
+	margin: 10px 10px 10px 10px;
+	padding-bottom: 10px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 80px;
+	line-height: 36px;
+	text-transform: capitalize;
+}
+.userScore {
+
+	width: 40px;
+	outline: none;
+	box-shadow: none;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 30px;
+	line-height: 36px;
+	text-align: center;
+	text-transform: capitalize;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+.inputEmpty {
+	width: 110px;
+	height: 110px;
+	float: left;
+	position: relative;
+	top: -50px;
+	left: 10px;
+	margin: 10px 10px 10px 10px;
+	padding-bottom: 10px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 80px;
+	line-height: 36px;
+	text-transform: capitalize;
+	border: 0px;
+	cursor: default; 
+}
+.closeBox {
+}
+#scoreMiddleShow{
+	position: relative;
+	top: -80px;
+	left: 10px;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 80px;
+	line-height: 36px;
+	text-transform: capitalize;
+	color: #ffffff;
+}
+
+    </style>
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script type="text/javascript">
+</script>
+
+</head>
+<body>
+	<div id="scoreBoard">
+		<table id="scoreTable">
+			<tr id="pn">
+				<th colspan="2" id="turn">
+					<div><label id="turnTop">turn</label><label id="turnBotton">2/12</label></div>
+				</th>
+				<th rowspan="2"	id="p1Name" class="pname"><label>P1</label></th>
+				<th rowspan="2" id="p2Name" class="pname"><label>P2</label></th>
+			</tr>
+			<tr>
+				<th colspan="2" id="categorise"><label>categorise</label></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/JoD9ifV.png"></th>
+				<th class="diceType"><label>Aces</label></th>
+				<th class="score"><div onclick='openFrontModal("p1Ace")'><input class="userScore" id="p1Ace" readonly value=''/></div></th>
+				<th class="score"><div onclick='openFrontModal("p2Ace")'><input class="userScore" id="p2Ace" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/1Bp2lgZ.png"></th>
+				<th class="diceType"><label>Deuces</label></th>
+				<th class="score"><div onclick='openFrontModal("p1Duce")'><input class="userScore" id="p1Duce" readonly value=''/></div></th>
+				<th class="score"><div onclick='openFrontModal("p2Duce")'><input class="userScore" id="p2Duce" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/KTKMGsW.png"></th>
+				<th class="diceType"><label>Threes</label></th>
+				<th class="score"><div onclick='openFrontModal("p1Three")'><input class="userScore" id="p1Three" readonly value=''/></div></th>
+				<th class="score"><div onclick='openFrontModal("p2Three")'><input class="userScore" id="p2Three" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/3yFJBNh.png"></th>
+				<th class="diceType"><label>Fours</label></th>
+				<th class="score"><div onclick='openFrontModal("p1Four")'><input class="userScore" id="p1Four" readonly value=''/></div></th>
+				<th class="score"><div onclick='openFrontModal("p2Four")'><input class="userScore" id="p2Four" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/vP38hby.png"></th>
+				<th class="diceType"><label>Fives<label></th>
+				<th class="score"><div onclick='openFrontModal("p1Five")'><input class="userScore" id="p1Five" readonly value=''/></div></th>
+				<th class="score"><div onclick='openFrontModal("p2Five")'><input class="userScore" id="p2Five" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/2adLt64.png"></th>
+				<th class="diceType"><label>Sixes</label></th>
+				<th class="score"><div onclick='openFrontModal("p1Six")'><input class="userScore" id="p1Six" readonly value=''/></div></th>
+				<th class="score"><div onclick='openFrontModal("p2Six")'><input class="userScore" id="p2Six" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th colspan="2" id="subTotal"><label>Subtotal</label></th>
+				<th class="subTotalScore"><div onclick=''><input class="userScore" id="p1SubTotal" readonly value='0'/><label>/64</label></div></th>
+				<th class="subTotalScore"><div onclick=''><input class="userScore" id="p2SubTotal" readonly value='0'/><label>/64</label></div></th>
+			</tr>
+			<tr>
+				<th colspan="2" id="bonus"><label>+35 Bonus</label></th>
+				<th class="bonusScore"><div><input class="userScore" id="p1Bonus" readonly value='0'></div></th>
+				<th class="bonusScore"><div><input class="userScore" id="p2Bonus" readonly value='0'></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/7Zj0QzL.png"></th>
+				<th class="diceType"><label>Choice</label></th>
+				<th class="score"><div onclick='openMiddleModal("p1Choice")'><input class="userScore" id="p1Choice" readonly value=''/></div></th>
+				<th class="score"><div onclick='openMiddleModal("p2Choice")'><input class="userScore" id="p2Choice" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/vIXAHOY.png"></th>
+				<th class="diceType"><label>4 of a Kind</label></th>
+				<th class="score"><div onclick='openMiddleModal("p1Kind")'><input class="userScore" id="p1Kind" readonly value=''/></div></th>
+				<th class="score"><div onclick='openMiddleModal("p2Kind")'><input class="userScore" id="p2Kind" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/MpXoh8O.png"></th>
+				<th class="diceType"><label>Full House</label></th>
+				<th class="score"><div onclick='openMiddleModal("p1House")'><input class="userScore" id="p1House" readonly value=''/></div></th>
+				<th class="score"><div onclick='openMiddleModal("p2House")'><input class="userScore" id="p2House" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/kbvtOpJ.png"></th>
+				<th class="diceType"><label>S.Straight</label></th>
+				<th class="score"><div onclick='openLastModal("p1SS")'><input class="userScore"id="p1SS" readonly value=''/></div></th>
+				<th class="score"><div onclick='openLastModal("p2SS")'><input class="userScore" id="p2SS" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/ZlXeZkv.png"></th>
+				<th class="diceType"><label>L.Straight</label></th>
+				<th class="score"><div onclick='openLastModal("p1LS")'><input class="userScore" id="p1LS" readonly value=''/></div></th>
+				<th class="score"><div onclick='openLastModal("p2LS")'><input class="userScore" id="p2LS" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th class="diceimg"><img src="https://i.imgur.com/5yW8ihC.png"></th>
+				<th class="diceType"><label>Yacht</label></th>
+				<th class="score"><div onclick='openLastModal("p1Yacht")'><input class="userScore" id="p1Yacht" readonly value=''/></div></th>
+				<th class="score"><div onclick='openLastModal("p2Yacht")'><input class="userScore" id="p2Yacht" readonly value=''/></div></th>
+			</tr>
+			<tr>
+				<th colspan="2" id="total"><label>Total</label></th>
+				<th class="totalScore"><div onclick=''><input class="userScore" id="p1Total" readonly value='0'/></div></th>
+				<th class="totalScore"><div onclick=''><input class="userScore" id="p2Total" readonly value='0'/></div></th>
+			</tr>
+						
+		</table>
+	</div>
+	
+	<div class="modalContainer">
+		<div><button class="closeBox"></button></div>
+		<div class="modalFrontPart">
+			<div><button class="scoreFrontInput" id="modalButton01"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton02"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton03"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton04"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton05"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton06"></button></div>
+			<div><input type="hidden" id="tempPlace" value=""/></div>
+		</div>
+		<div class="modalMiddlePart">
+			<div><label id="scoreMiddleShow">0</label></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(1)">1</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(2)">2</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(3)">3</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(4)">4</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(5)">5</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(6)">6</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(7)">7</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(8)">8</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(9)">9</button></div>
+			<div><button class="scoreMiddleInput inputEmpty"></button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(0)">0</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(-1)">ok</button></div>
+			<div><input type="hidden" id="tempPlace" value=""/></div>
+		</div>
+		<div class="modalLastPart">
+			<div><button class="scoreLastInput" onclick="inputLast('ture')">o</button></div>
+			<div><button class="scoreLastInput" onclick="inputLast('false')">x</button></div>
+			<div><input type="hidden" id="tempPlace" value=""/></div>
+		</div>
+	</div>
+	<script>
+        var modalFrontPart = document.querySelector('.modalFrontPart')
+		var modalMiddlePart = document.querySelector('.modalMiddlePart')
+		var modalLastPart = document.querySelector('.modalLastPart')
+        var modalContainer = document.querySelector('.modalContainer')
+		var keyPadSum = '';
+
+        function openFrontModal(place){
+		var temp = document.getElementById('tempPlace');
+		temp.value = place;
+		place = place.substr(2);
+		var i = 1;
+		
+		switch(place){
+			case 'Ace':
+				i = i * 1;
+				break;
+			case 'Duce':
+				i = i * 2;
+				break;
+			case 'Three':
+				i = i * 3;
+				break;
+			case 'Four':
+				i = i * 4;
+				break;
+			case 'Five':
+				i = i * 5;
+				break;
+			case 'Six':
+				i = i * 6;
+				break;
+		}
+		
+		var button = 'empty';
+		
+		button = document.getElementById('modalButton01');
+		button.setAttribute('onclick','inputFront('+ i * 1 + ')');
+		button.innerText = i * 1;
+		button = document.getElementById('modalButton02');
+		button.setAttribute('onclick','inputFront('+ i * 2 + ')');
+		button.innerText = i * 2;
+		button = document.getElementById('modalButton03');
+		button.setAttribute('onclick','inputFront('+ i * 3 + ')');
+		button.innerText = i * 3;
+		button = document.getElementById('modalButton04');
+		button.setAttribute('onclick','inputFront('+ i * 4 + ')');
+		button.innerText = i * 4;
+		button = document.getElementById('modalButton05');
+		button.setAttribute('onclick','inputFront('+ i * 5 + ')');
+		button.innerText = i * 5;
+		button = document.getElementById('modalButton06');
+		button.setAttribute('onclick','inputFront('+ i * 0 + ')');
+		button.innerText = i * 0;
+		
+		i = 1;
+		
+        modalFrontPart.classList.add('show-modal')
+        modalContainer.classList.add('show-modal')
+        }
+		function openMiddleModal(place){
+		var temp = document.getElementById('tempPlace');
+		temp.value = place;
+        modalMiddlePart.classList.add('show-modal')
+        modalContainer.classList.add('show-modal')
+        }
+		function openLastModal(place){
+		var temp = document.getElementById('tempPlace');
+		temp.value = place;
+        modalLastPart.classList.add('show-modal')
+        modalContainer.classList.add('show-modal')
+        }
+		function inputFront(num){
+			var temp = document.getElementById('tempPlace').value;
+			var inputPlace = document.getElementById(temp);
+			var scoreMiddleShow = document.getElementById('scoreMiddleShow');
+			inputPlace.value = num;
+			math();
+			
+			modalFrontPart.classList.remove('show-modal');
+			modalContainer.classList.remove('show-modal');
+		}
+		function inputMiddle(num){
+			var temp = document.getElementById('tempPlace').value;
+			var inputPlace = document.getElementById(temp);
+			var sum = keyPadSum + num;
+			sum = sum * 1;
+			
+			if(num == '-1'){
+				inputPlace.value = keyPadSum;
+				keyPadSum = '';
+				math();
+				modalMiddlePart.classList.remove('show-modal');
+				modalContainer.classList.remove('show-modal');
+				scoreMiddleShow.innerText = 0;
+			}else if(sum < 100){
+				keyPadSum = keyPadSum + num;
+				scoreMiddleShow.innerText = keyPadSum;
+			}else{
+			keyPadSum = keyPadSum.substr(1) + num;
+			scoreMiddleShow.innerText = keyPadSum;
+			}
+
+		}
+		function inputLast(str){
+			var temp = document.getElementById('tempPlace').value;
+			var inputPlace = document.getElementById(temp);
+			var a = temp.substr(2);
+			switch(a){
+				case 'SS':
+					if(str == 'ture'){
+						inputPlace.value = 15;
+					}else{
+						inputPlace.value = 0;
+					};
+					break;
+				case 'LS':
+					if(str == 'ture'){
+						inputPlace.value = 30;
+					}else{
+						inputPlace.value = 0;
+					};
+					break;
+				case 'Yacht':
+					if(str == 'ture'){
+						inputPlace.value = 50;
+					}else{
+						inputPlace.value = 0;
+					};
+					break;
+					
+			}
+			math();
+			
+			modalLastPart.classList.remove('show-modal');
+			modalContainer.classList.remove('show-modal');
+		}
+		function math(){
+			var p1Bonus = $('#p1Ace').val()*1 + $('#p1Duce').val()*1 + $('#p1Three').val()*1 + $('#p1Four').val()*1 + $('#p1Five').val()*1 + $('#p1Six').val()*1;
+			
+			if(p1Bonus > 64){
+				$('#p1Bonus').val(35);
+			};
+			$('#p1SubTotal').val(p1Bonus);
+			var p1Total = $('#p1Choice').val()*1 + $('#p1Kind').val()*1 + $('#p1House').val()*1 + $('#p1SS').val()*1 + $('#p1LS').val()*1 + $('#p1Yacht').val()*1 + $('#p1Bonus').val()*1 + p1Bonus;
+			$('#p1Total').val(p1Total);
+			
+			var p2Bonus = $('#p2Ace').val()*1 + $('#p2Duce').val()*1 + $('#p2Three').val()*1 + $('#p2Four').val()*1 + $('#p2Five').val()*1 + $('#p2Six').val()*1;
+			
+			if(p2Bonus > 64){
+				$('#p2Bonus').val(35);
+			};
+			$('#p2SubTotal').val(p2Bonus);
+			var p2Total = $('#p2Choice').val()*1 + $('#p2Kind').val()*1 + $('#p2House').val()*1 + $('#p2SS').val()*1 + $('#p2LS').val()*1 + $('#p2Yacht').val()*1 + $('#p2Bonus').val()*1 + p2Bonus;
+			$('#p2Total').val(p2Total);
+			
+		}
+		function close(){
+			keyPadSum = '';
+			scoreMiddleShow.innerText = 0;
+			modalFrontPart.classList.remove('show-modal');
+			modalMiddlePart.classList.remove('show-modal');
+			modalLastPart.classList.remove('show-modal');
+			modalContainer.classList.remove('show-modal');
+		}
+		document.querySelector('.closeBox').addEventListener('click', () => {
+        close()
+        })
+        //Hide modal
+        window.addEventListener('click', (e) => {
+        e.target === modalContainer ?  close() : false
+        }) 
+
+</script>
+
+</body>
+</html>
