@@ -25,13 +25,10 @@
 	border-bottom : 1px solid #D9D9D9;
 	padding : 0px;
   }
-  #scoreTable label {
-	margin : 0px;
-  }
   #scoreTable img {
 	width : 28px;
 	height : 28px;
-	margin-left : 16px;
+	margin-top : 5px;
   }
   .diceimg {
 	width : 68px;
@@ -51,7 +48,7 @@
 	
 	padding-bottom: 7px;
   }
-  .score, .subTotalScore, .bonusScore, .totalScore {
+  .p1Score, .p2Score, .subTotalScore, .bonusScore, .totalScore {
 	border-left : 1px solid #D9D9D9;
     text-align: center;
   }
@@ -72,7 +69,7 @@
   }
   #turnTop {
   	width : 268px;
-	height : 52px;
+	height : 36px;
 	font-family: 'Pretendard';
 	font-style: normal;
 	font-weight: 200;
@@ -81,20 +78,21 @@
 	line-height: 36px;
 	text-transform: uppercase;
 	text-align : center;
-	padding-top : 15px;
-
+	display: inline-block;
+	margin-top: 15px;
   }
-  #turnBotton {
+  #turnBottom {
 	width : 268px;
-    height : 105px;
+    height : 80px;
 	font-family: 'Pretendard';
 	font-style: normal;
 	font-weight: 200;
 	font-size: 80px;
-	line-height: 95px;
+	line-height: 55px;
 	letter-spacing: 0.075em;
 	text-transform: uppercase;
 	text-align : center;
+	display: inline-block;
 
   }
   #categorise{
@@ -114,12 +112,18 @@
 	padding-bottom: 5px;
 
   }
-  .score{
-    height : 49px
+  .p1Score{
+    height : 49px;
+	background-color: #ffffb3;
+  }
+  .p2Score{
+	height : 49px;
+  	background-color: white;
   }
   #subTotal{
 	height : 38px;
 	background-color : #403F41;
+	text-align: left;
   }
   #subTotal label{
 	font-family: 'Pretendard';
@@ -138,13 +142,13 @@
 	font-weight: 300;
 	font-size: 22px;
 	line-height: 26px;
-	text-align: right;
 	text-transform: capitalize;
 	color: #A0A0A0;
   }
   #bonus {
 	height : 54px;
 	background-color : #403F41;
+	text-align: left;
   }
   #bonus label {
 	font-family: 'Pretendard';
@@ -160,6 +164,7 @@
   #total {
 	height : 62px;
 	background-color : #403F41;
+	text-align: left;
   }
   #total label {
 	font-family: 'Pretendard';
@@ -250,7 +255,7 @@
 	top: 10px;
 	left: 10px;
 	margin: 10px 10px 10px 10px;
-	padding: 0px 0px 5px 0px;
+	padding: 0px 0px 10px 0px;
 	font-family: 'Pretendard';
 	font-style: normal;
 	font-weight: 600;
@@ -267,7 +272,7 @@
 	top: -50px;
 	left: 10px;
 	margin: 10px 10px 10px 10px;
-	padding: 0px 0px 5px 0px;
+	padding: 0px 0px 10px 0px;
 	padding-bottom: 10px;
 	font-family: 'Pretendard';
 	font-style: normal;
@@ -284,7 +289,7 @@
 	top: -50px;
 	left: 10px;
 	margin: 10px 10px 10px 10px;
-	padding: 0px 0px 5px 0px;
+	padding: 0px 0px 10px 0px;
 	font-family: 'Pretendard';
 	font-style: normal;
 	font-weight: 600;
@@ -302,7 +307,7 @@
 	top: 10px;
 	left: 10px;
 	margin: 10px 10px 10px 10px;
-	padding: 0px 0px 5px 0px;
+	padding: 0px 0px 10px 0px;
 	font-family: 'Pretendard';
 	font-style: normal;
 	font-weight: 600;
@@ -314,7 +319,7 @@
 
 .userScore {
 
-	width: 40px;
+	width: 60px;
 	outline: none;
 	box-shadow: none;
 	font-family: 'Pretendard';
@@ -327,6 +332,7 @@
 	padding: 0px;
 	margin: 0px;
 	border: 0px;
+	background-color:transparent;
 }
 .closeBox {
 }
@@ -346,8 +352,6 @@
     </style>
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript">
 </script>
 
@@ -357,7 +361,7 @@
 		<table id="scoreTable">
 			<tr id="pn">
 				<th colspan="2" id="turn">
-					<div><label id="turnTop">turn</label><label id="turnBotton">2/12</label></div>
+					<div><label id="turnTop">turn</label><label id="turnBottom">1/12</label></div>
 				</th>
 				<th rowspan="2"	id="p1Name" class="pname"><label>P1</label></th>
 				<th rowspan="2" id="p2Name" class="pname"><label>P2</label></th>
@@ -368,38 +372,38 @@
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/JoD9ifV.png"></th>
 				<th class="diceType"><label>Aces</label></th>
-				<th class="score"><div onclick='openFrontModal("p1Ace")'><input class="userScore" id="p1Ace" readonly value=''/></div></th>
-				<th class="score"><div onclick='openFrontModal("p2Ace")'><input class="userScore" id="p2Ace" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openFrontModal("p1Ace")'><input class="userScore" id="p1Ace" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openFrontModal("p2Ace")'><input class="userScore" id="p2Ace" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/1Bp2lgZ.png"></th>
 				<th class="diceType"><label>Deuces</label></th>
-				<th class="score"><div onclick='openFrontModal("p1Duce")'><input class="userScore" id="p1Duce" readonly value=''/></div></th>
-				<th class="score"><div onclick='openFrontModal("p2Duce")'><input class="userScore" id="p2Duce" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openFrontModal("p1Duce")'><input class="userScore" id="p1Duce" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openFrontModal("p2Duce")'><input class="userScore" id="p2Duce" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/KTKMGsW.png"></th>
 				<th class="diceType"><label>Threes</label></th>
-				<th class="score"><div onclick='openFrontModal("p1Three")'><input class="userScore" id="p1Three" readonly value=''/></div></th>
-				<th class="score"><div onclick='openFrontModal("p2Three")'><input class="userScore" id="p2Three" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openFrontModal("p1Three")'><input class="userScore" id="p1Three" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openFrontModal("p2Three")'><input class="userScore" id="p2Three" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/3yFJBNh.png"></th>
 				<th class="diceType"><label>Fours</label></th>
-				<th class="score"><div onclick='openFrontModal("p1Four")'><input class="userScore" id="p1Four" readonly value=''/></div></th>
-				<th class="score"><div onclick='openFrontModal("p2Four")'><input class="userScore" id="p2Four" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openFrontModal("p1Four")'><input class="userScore" id="p1Four" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openFrontModal("p2Four")'><input class="userScore" id="p2Four" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/vP38hby.png"></th>
 				<th class="diceType"><label>Fives<label></th>
-				<th class="score"><div onclick='openFrontModal("p1Five")'><input class="userScore" id="p1Five" readonly value=''/></div></th>
-				<th class="score"><div onclick='openFrontModal("p2Five")'><input class="userScore" id="p2Five" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openFrontModal("p1Five")'><input class="userScore" id="p1Five" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openFrontModal("p2Five")'><input class="userScore" id="p2Five" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/2adLt64.png"></th>
 				<th class="diceType"><label>Sixes</label></th>
-				<th class="score"><div onclick='openFrontModal("p1Six")'><input class="userScore" id="p1Six" readonly value=''/></div></th>
-				<th class="score"><div onclick='openFrontModal("p2Six")'><input class="userScore" id="p2Six" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openFrontModal("p1Six")'><input class="userScore" id="p1Six" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openFrontModal("p2Six")'><input class="userScore" id="p2Six" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th colspan="2" id="subTotal"><label>Subtotal</label></th>
@@ -414,38 +418,38 @@
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/7Zj0QzL.png"></th>
 				<th class="diceType"><label>Choice</label></th>
-				<th class="score"><div onclick='openMiddleModal("p1Choice")'><input class="userScore" id="p1Choice" readonly value=''/></div></th>
-				<th class="score"><div onclick='openMiddleModal("p2Choice")'><input class="userScore" id="p2Choice" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openMiddleModal("p1Choice")'><input class="userScore" id="p1Choice" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openMiddleModal("p2Choice")'><input class="userScore" id="p2Choice" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/vIXAHOY.png"></th>
 				<th class="diceType"><label>4 of a Kind</label></th>
-				<th class="score"><div onclick='openMiddleModal("p1Kind")'><input class="userScore" id="p1Kind" readonly value=''/></div></th>
-				<th class="score"><div onclick='openMiddleModal("p2Kind")'><input class="userScore" id="p2Kind" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openMiddleModal("p1Kind")'><input class="userScore" id="p1Kind" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openMiddleModal("p2Kind")'><input class="userScore" id="p2Kind" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/MpXoh8O.png"></th>
 				<th class="diceType"><label>Full House</label></th>
-				<th class="score"><div onclick='openMiddleModal("p1House")'><input class="userScore" id="p1House" readonly value=''/></div></th>
-				<th class="score"><div onclick='openMiddleModal("p2House")'><input class="userScore" id="p2House" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openMiddleModal("p1House")'><input class="userScore" id="p1House" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openMiddleModal("p2House")'><input class="userScore" id="p2House" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/kbvtOpJ.png"></th>
 				<th class="diceType"><label>S.Straight</label></th>
-				<th class="score"><div onclick='openLastModal("p1SS")'><input class="userScore"id="p1SS" readonly value=''/></div></th>
-				<th class="score"><div onclick='openLastModal("p2SS")'><input class="userScore" id="p2SS" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openLastModal("p1SS")'><input class="userScore"id="p1SS" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openLastModal("p2SS")'><input class="userScore" id="p2SS" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/ZlXeZkv.png"></th>
 				<th class="diceType"><label>L.Straight</label></th>
-				<th class="score"><div onclick='openLastModal("p1LS")'><input class="userScore" id="p1LS" readonly value=''/></div></th>
-				<th class="score"><div onclick='openLastModal("p2LS")'><input class="userScore" id="p2LS" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openLastModal("p1LS")'><input class="userScore" id="p1LS" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openLastModal("p2LS")'><input class="userScore" id="p2LS" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th class="diceimg"><img src="https://i.imgur.com/5yW8ihC.png"></th>
 				<th class="diceType"><label>Yacht</label></th>
-				<th class="score"><div onclick='openLastModal("p1Yacht")'><input class="userScore" id="p1Yacht" readonly value=''/></div></th>
-				<th class="score"><div onclick='openLastModal("p2Yacht")'><input class="userScore" id="p2Yacht" readonly value=''/></div></th>
+				<th class="p1Score"><div class="p1Line" onclick='openLastModal("p1Yacht")'><input class="userScore" id="p1Yacht" readonly value=''/></div></th>
+				<th class="p2Score"><div class="p2Line" onclick='openLastModal("p2Yacht")'><input class="userScore" id="p2Yacht" readonly value=''/></div></th>
 			</tr>
 			<tr>
 				<th colspan="2" id="total"><label>Total</label></th>
@@ -494,72 +498,89 @@
 		var modalMiddlePart = document.querySelector('.modalMiddlePart')
 		var modalLastPart = document.querySelector('.modalLastPart')
         var modalContainer = document.querySelector('.modalContainer')
-		var keyPadSum = '';
+		var keyPadSum = '0';
+		var turn = 1;
+		var player = 1;
 
         function openFrontModal(place){
-		var temp = document.getElementById('tempPlace');
-		temp.value = place;
-		place = place.substr(2);
-		var i = 1;
 		
-		switch(place){
-			case 'Ace':
-				i = i * 1;
-				break;
-			case 'Duce':
-				i = i * 2;
-				break;
-			case 'Three':
-				i = i * 3;
-				break;
-			case 'Four':
-				i = i * 4;
-				break;
-			case 'Five':
-				i = i * 5;
-				break;
-			case 'Six':
-				i = i * 6;
-				break;
-		}
-		
-		var button = 'empty';
-		
-		button = document.getElementById('modalButton01');
-		button.setAttribute('onclick','inputFront('+ i * 1 + ')');
-		button.innerText = i * 1;
-		button = document.getElementById('modalButton02');
-		button.setAttribute('onclick','inputFront('+ i * 2 + ')');
-		button.innerText = i * 2;
-		button = document.getElementById('modalButton03');
-		button.setAttribute('onclick','inputFront('+ i * 3 + ')');
-		button.innerText = i * 3;
-		button = document.getElementById('modalButton04');
-		button.setAttribute('onclick','inputFront('+ i * 4 + ')');
-		button.innerText = i * 4;
-		button = document.getElementById('modalButton05');
-		button.setAttribute('onclick','inputFront('+ i * 5 + ')');
-		button.innerText = i * 5;
-		button = document.getElementById('modalButton06');
-		button.setAttribute('onclick','inputFront('+ i * 0 + ')');
-		button.innerText = i * 0;
-		
-		i = 1;
-		
-        modalFrontPart.classList.add('show-modal')
-        modalContainer.classList.add('show-modal')
+			var check = insertClick(place);
+			
+			var temp = document.getElementById('tempPlace');
+			temp.value = place;
+			place = place.substr(2);
+			var i = 1;
+
+			if(check == 1){
+				return;
+			}
+			
+			switch(place){
+				case 'Ace':
+					i = i * 1;
+					break;
+				case 'Duce':
+					i = i * 2;
+					break;
+				case 'Three':
+					i = i * 3;
+					break;
+				case 'Four':
+					i = i * 4;
+					break;
+				case 'Five':
+					i = i * 5;
+					break;
+				case 'Six':
+					i = i * 6;
+					break;
+			}
+			
+			var button = 'empty';
+			
+			button = document.getElementById('modalButton01');
+			button.setAttribute('onclick','inputFront('+ i * 1 + ')');
+			button.innerText = i * 1;
+			button = document.getElementById('modalButton02');
+			button.setAttribute('onclick','inputFront('+ i * 2 + ')');
+			button.innerText = i * 2;
+			button = document.getElementById('modalButton03');
+			button.setAttribute('onclick','inputFront('+ i * 3 + ')');
+			button.innerText = i * 3;
+			button = document.getElementById('modalButton04');
+			button.setAttribute('onclick','inputFront('+ i * 4 + ')');
+			button.innerText = i * 4;
+			button = document.getElementById('modalButton05');
+			button.setAttribute('onclick','inputFront('+ i * 5 + ')');
+			button.innerText = i * 5;
+			button = document.getElementById('modalButton06');
+			button.setAttribute('onclick','inputFront('+ i * 0 + ')');
+			button.innerText = i * 0;
+			
+			i = 1;
+			
+			modalFrontPart.classList.add('show-modal')
+			modalContainer.classList.add('show-modal')
         }
 		function openMiddleModal(place){
-		var temp = document.getElementById('tempPlace');
-		temp.value = place;
-        modalMiddlePart.classList.add('show-modal')
-        modalContainer.classList.add('show-modal')
-        }
+			var temp = document.getElementById('tempPlace');
+			var check = insertClick(place);
+			if(check == 1){
+				return;
+			}
+			temp.value = place;
+			modalMiddlePart.classList.add('show-modal')
+			modalContainer.classList.add('show-modal')
+		}
 		function openLastModal(place){
-		var temp = document.getElementById('tempPlace');
-		temp.value = place;
-        modalLastPart.classList.add('show-modal')
-        modalContainer.classList.add('show-modal')
+			var temp = document.getElementById('tempPlace');
+			var check = insertClick(place);
+			if(check == 1){
+				return;
+			}
+			temp.value = place;
+			modalLastPart.classList.add('show-modal')
+			modalContainer.classList.add('show-modal')
         }
 		function inputFront(num){
 			var temp = document.getElementById('tempPlace').value;
@@ -567,6 +588,8 @@
 			var scoreMiddleShow = document.getElementById('scoreMiddleShow');
 			inputPlace.value = num;
 			math();
+			lineColor(temp);
+			finish();
 			
 			modalFrontPart.classList.remove('show-modal');
 			modalContainer.classList.remove('show-modal');
@@ -574,17 +597,19 @@
 		function inputMiddle(num){
 			var temp = document.getElementById('tempPlace').value;
 			var inputPlace = document.getElementById(temp);
-			var sum = keyPadSum + num;
-			sum = sum * 1;
+			var str = keyPadSum + num;
+			str = str.length
 			
 			if(num == '-1'){
 				inputPlace.value = keyPadSum;
-				keyPadSum = '';
+				keyPadSum = '0';
 				math();
+				lineColor(temp);
+				finish();
 				modalMiddlePart.classList.remove('show-modal');
 				modalContainer.classList.remove('show-modal');
 				scoreMiddleShow.innerText = 0;
-			}else if(sum < 100){
+			}else if(str < 3){
 				keyPadSum = keyPadSum + num;
 				scoreMiddleShow.innerText = keyPadSum;
 			}else{
@@ -622,6 +647,8 @@
 					
 			}
 			math();
+			lineColor(temp);
+			finish();
 			
 			modalLastPart.classList.remove('show-modal');
 			modalContainer.classList.remove('show-modal');
@@ -646,6 +673,46 @@
 			$('#p2Total').val(p2Total);
 			
 		}
+		function insertClick(str){
+//			alert(str);
+			var num = str.substr(1, 1);
+			num = num * 1;
+			var inputPlace = document.getElementById(str).value;
+			
+			if(num != player){
+				return 1;
+			}
+			if(inputPlace != ''){
+				return 1;
+			}
+		}
+		function lineColor(str){
+			var num = str.substr(1, 1);
+			num = num * 1;
+			var line = '';
+			var otherNum = 0;
+			var otherLine = '';
+			var turnBottom = document.getElementById('turnBottom');
+			
+			if(num == 1){
+				otherNum = 2;
+				player = 2;
+			}else{
+				otherNum = 1;
+				turn = turn + 1;
+				turnBottom.innerText = turn + '/12';
+				player = 1;
+			}
+			
+			line = $(".p" + num + "Score");
+			otherLine = $(".p" + otherNum + "Score");
+			
+			for(var i=0; i<12; i++){
+				line[i].style.backgroundColor = 'white';
+				otherLine[i].style.backgroundColor = '#ffffb3';
+			}
+			
+		}
 		function close(){
 			keyPadSum = '';
 			scoreMiddleShow.innerText = 0;
@@ -653,6 +720,36 @@
 			modalMiddlePart.classList.remove('show-modal');
 			modalLastPart.classList.remove('show-modal');
 			modalContainer.classList.remove('show-modal');
+		}
+		function finish(){
+		
+			if(turn == 13){
+				var p1Total = document.getElementById('p1Total').value;
+				var p2Total = document.getElementById('p2Total').value;
+				var p1line = $(".p1Score");
+				var p2Line = $(".p2Score");
+				
+				p1Total = p1Total * 1;
+				p2Total = p2Total * 1;
+				
+				if(p1Total > p2Total){
+					for(var i=0; i<12; i++){
+						p1line[i].style.backgroundColor = '#6699ff';
+						p2Line[i].style.backgroundColor = '#ff9999';
+					}
+				}else{
+					for(var i=0; i<12; i++){
+						p2Line[i].style.backgroundColor = '#ff9999';
+						p1line[i].style.backgroundColor = '#6699ff';
+					}
+				}
+				turn = turn - 1;
+				var turnBottom = document.getElementById('turnBottom');
+				turnBottom.innerText = turn + '/12';
+				
+			}
+			
+
 		}
 		document.querySelector('.closeBox').addEventListener('click', () => {
         close()
