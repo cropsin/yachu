@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <title>야추</title>
 <style type="text/css">
-  input, textarea {
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
-    Border-radius:0;
-    Background:none;
-  }
   #scoreBoard {
 	width : 834px;
 	height : 1194px;
@@ -458,35 +452,35 @@
 	</div>
 	
 	<div class="modalContainer">
-		<div><input class="closeBox"></input></div>
+		<div><button class="closeBox"></button></div>
 		<div class="modalFrontPart">
-			<div><input class="scoreFrontInput" id="modalButton01"></input></div>
-			<div><input class="scoreFrontInput" id="modalButton02"></input></div>
-			<div><input class="scoreFrontInput" id="modalButton03"></input></div>
-			<div><input class="scoreFrontInput" id="modalButton04"></input></div>
-			<div><input class="scoreFrontInput" id="modalButton05"></input></div>
-			<div><input class="scoreFrontInput" id="modalButton06"></input></div>
+			<div><button class="scoreFrontInput" id="modalButton01"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton02"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton03"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton04"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton05"></button></div>
+			<div><button class="scoreFrontInput" id="modalButton06"></button></div>
 			<div><input type="hidden" id="tempPlace" value=""/></div>
 		</div>
 		<div class="modalMiddlePart">
 			<div><label id="scoreMiddleShow">0</label></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(1)" value=1>1</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(2)">2</input></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(1)">1</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(2)">2</button></div>
 			<div><button class="scoreMiddleInput" onclick="inputMiddle(3)">3</button></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(4)">4</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(5)">5</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(6)">6</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(7)">7</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(8)">8</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(9)">9</input></div>
-			<div><input class="scoreMiddleInput inputEmpty"></input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(0)">0</input></div>
-			<div><input class="scoreMiddleInput" onclick="inputMiddle(-1)">ok</input></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(4)">4</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(5)">5</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(6)">6</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(7)">7</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(8)">8</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(9)">9</button></div>
+			<div><button class="scoreMiddleInput inputEmpty"></button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(0)">0</button></div>
+			<div><button class="scoreMiddleInput" onclick="inputMiddle(-1)">ok</button></div>
 			<div><input type="hidden" id="tempPlace" value=""/></div>
 		</div>
 		<div class="modalLastPart">
-			<div><input class="scoreLastInput" onclick="inputLast('ture')">o</input></div>
-			<div><input class="scoreLastInput" onclick="inputLast('false')">x</input></div>
+			<div><button class="scoreLastInput" onclick="inputLast('ture')">o</button></div>
+			<div><button class="scoreLastInput" onclick="inputLast('false')">x</button></div>
 			<div><input type="hidden" id="tempPlace" value=""/></div>
 		</div>
 	</div>
