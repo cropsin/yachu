@@ -241,7 +241,7 @@
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-color:rgba(0, 0,0, 0.5);
+	background-color:rgba(0, 0, 0, 0.5);
 	top:0;
 	left: 0;
 	z-index: 1;
@@ -338,6 +338,20 @@
 	background-color:transparent;
 }
 .closeBox {
+	position:absolute;
+	width : 50px;
+	height : 50px;
+	border : 1px solid #cccccc;
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 30px;
+	line-height: 36px;
+	text-align: center;
+	text-transform: capitalize;
+	top: 170px;
+	left : 1100px;
+	background-color:transparent;
 }
 #scoreMiddleShow{
 	position: relative;
@@ -464,7 +478,7 @@
 	</div>
 	
 	<div class="modalContainer">
-		<div><button class="closeBox"></button></div>
+		<div><button class="closeBox">x</button></div>
 		<div class="modalFrontPart">
 			<div><button class="scoreFrontInput" id="modalButton01"></button></div>
 			<div><button class="scoreFrontInput" id="modalButton02"></button></div>
@@ -604,6 +618,13 @@
 			str = str.length
 			
 			if(num == '-1'){
+				
+				str = keyPadSum.substr(0, 1);
+				if(str == '0')
+				{
+					keyPadSum = keyPadSum.substr(1);
+				}
+			
 				inputPlace.value = keyPadSum;
 				keyPadSum = '0';
 				math();
