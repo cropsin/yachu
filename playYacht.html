@@ -341,7 +341,7 @@
 	position:absolute;
 	width : 50px;
 	height : 50px;
-	border : 1px solid #cccccc;
+	border: 0px;
 	font-family: 'Pretendard';
 	font-style: normal;
 	font-weight: 400;
@@ -349,9 +349,10 @@
 	line-height: 36px;
 	text-align: center;
 	text-transform: capitalize;
-	top: 170px;
-	left : 1100px;
+	top: 300px;
+	left : 200px;
 	background-color:transparent;
+	color: white;
 }
 #scoreMiddleShow{
 	position: relative;
@@ -615,7 +616,7 @@
 			var temp = document.getElementById('tempPlace').value;
 			var inputPlace = document.getElementById(temp);
 			var str = keyPadSum + num;
-			str = str.length
+			str = str.length;
 			
 			if(num == '-1'){
 				
@@ -623,6 +624,10 @@
 				if(str == '0')
 				{
 					keyPadSum = keyPadSum.substr(1);
+					str = keyPadSum.length;
+					if(str < 1){
+						keyPadSum = 0;
+					}
 				}
 			
 				inputPlace.value = keyPadSum;
